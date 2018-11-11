@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cursosModulo"><!-- ng inicializa o modulo -->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="@ahmad.faris">
+    <script src="js/angular.min.js"></script> <!-- pra importar primeiro se n não roda -->
+    <link rel="icon" href="imagens/logo.png">
+
+
+    <title>Cursos</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <script src="controller/curso.js"></script>
+  </head>
+<!-- NAVBAR ================================================== -->
+  <body ng-controller="cursosController as vm"><!-- importa o controller -->
+	<div ng-include="'menus/menu_others.html'">
+    </div>
+
+    <div class="container">
+      <h1 align="center">Lista e cadastro de Cursos</h1>
+      <form >
+            <div class="form-group">
+              <label for="codigo" >Código</label>
+
+              <input type="text" ng-model="vm.curso.codigo" readonly class="form-control" id="codigo" placeholder="Código">
+
+            </div>
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" ng-model="vm.curso.nome" class="form-control" id="nome" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <label for="horario">Dias e Horários</label>
+                <input type="text" ng-model="vm.curso.diasHorarios" class="form-control" id="horario" placeholder="Horário">
+            </div>
+
+            <div class="form-group">
+                <label for="professor">Professor</label>
+                <select class="form-control" ng-model="vm.curso.professorModel" ng-options="professorModel.nome for professorModel in vm.professores track by professorModel.codigo">
+
+                </select>
+
+                <p></p>
+
+            
+
+            <button type="submit" ng-click="vm.limparCampos()" class="btn btn-success">Limpar</button>
+            <button type="submit" ng-click="vm.salvar()" class="btn btn-primary">Salvar</button>
+            <button type="submit" ng-click="vm.excluir()" class="btn btn-danger">Excluir</button>
+
+            </div>
+
+        <div class="form-group">
+            <label>Pesquisar:</label>
+            <input type="text" ng-model="vm.pesquisaCurso" style="width:500px;font-size: 15px" class="form-control" id="pesquisa" placeholder="Digite a pesquisa">
+        </div>
+      </form>
+    </div>
+
+<div class="container">
+    <table id="tabelaCursos" class="table table-striped">
+    <tr>
+      <th>Código</th>
+      <th>Descrição</th>
+      <th>Horários</th>
+      <th>Professor</th>
+	</tr>
+      <tr ng-repeat="cursosTabela in vm.cursos | filter:vm.pesquisaCurso" ng-click="vm.selecionaCurso(cursosTabela)">
+        <td>{{cursosTabela.codigo}}</td>
+        <td>{{cursosTabela.nome}}</td>
+        <td>{{cursosTabela.diasHorarios}}</td>
+        <td>{{cursosTabela.professorModel.nome}}</td>
+      </tr>
+
+    </table>
+</div>
+    <br>
+    <br>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="javascript:window.location.href=window.location.href">Back to top</a></p>
+        <p>&copy; 2017 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="termo.html" target="_blank">Terms</a></p>
+      </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

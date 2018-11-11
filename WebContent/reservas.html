@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="professoresModulo"><!-- ng inicializa o modulo -->
+  <head>
+  	
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="js/angular.min.js"></script> <!-- pra importar primeiro se n não roda -->
+    <link rel="icon" href="imagens/logo.png"><link>
+
+
+    <title>Reservas</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <script src="controller/professor.js"></script>
+  </head>
+<!-- NAVBAR ================================================== -->
+  <body ng-controller="professoresController as vm"><!-- importa o controller -->
+	<div ng-include="'menus/menu_others.html'">
+    </div>
+    
+    <div class="container">
+      <h1 align="center">Lista e cadastro de Professores</h1>
+      <form>
+            <div class="form-group">
+              <label for="codigo" >Código</label>
+
+              <input type="text" readonly ng-model="vm.professor.codigo" class="form-control" id="codigo" placeholder="Código">
+
+            </div>
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" ng-model="vm.professor.nome" class="form-control" id="nome" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail </label>
+                <input type="email" ng-model="vm.professor.email" class="form-control" id="email" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Telefone</label>
+                <input type="text" ng-model="vm.professor.fone" class="form-control" id="fone" placeholder="Telefone">
+                <p></p>
+      <!--     <div>
+            <input type="checkbox" ng-model="checkterms" style="width:20px">
+            <label>Li e aceito os</label>
+            <a href="termo.html" target="blank">termos de uso</a>
+          </div> -->
+
+            <button type="submit" ng-click="vm.limparListarCampos()" class="btn btn-success">Limpar</button>
+            <button type="submit" ng-click="vm.salvar()" class="btn btn-primary">Salvar</button>
+            <button type="submit" ng-click="vm.excluir()" class="btn btn-danger">Excluir</button>
+
+            </div>
+
+        <div class="form-group">
+            <label>Pesquisar:</label>
+            <input type="text" ng-model="vm.pesquisaProfessor" style="width:500px;font-size: 15px" class="form-control" id="pesquisa" placeholder="Digite a pesquisa">
+        </div>
+        </form>
+    </div>
+     
+
+<div class="container">
+    <table id="tabelaProfessor" class="table table-striped">
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Telefone</th>
+     </tr>
+      <tr ng-repeat="professoresTabela in vm.professores | filter:vm.pesquisaProfessor" ng-click="vm.selecionaProfessor(professoresTabela)">
+        <td>{{professoresTabela.codigo}}</td>
+        <td>{{professoresTabela.nome}}</td>
+        <td>{{professoresTabela.email}}</td>
+        <td>{{professoresTabela.fone}}</td>
+      </tr>
+
+    </table>
+</div>
+
+    <br>
+    <br>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="javascript:window.location.href=window.location.href">Back to top</a></p>
+        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="termo.html" target="_blank">Terms</a></p>
+      </footer>
+
+    
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>
